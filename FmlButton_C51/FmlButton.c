@@ -4,7 +4,7 @@
  * @post      Embedded Software Engineer
  * @brief     按键
  * @version   1.0.0
- * @date      2023-04-03
+ * @date      2023-04-18
  * @copyright Copyright (c) 2023
  */
 #include "FmlButton.h"
@@ -23,12 +23,12 @@ static void FML_Button_Debounce(ButtonField_TypeDef *handle);
 static void FML_Button_Handle(ButtonField_TypeDef *handle);
 
 void FML_Button_Init(ButtonField_TypeDef *handle,
-                            void (*Init)(void),
-                            bool (*GetButtonStatus)(uint8_t buttonID),
-                            uint8_t buttonID);
+                     void (*Init)(void),
+                     bool (*GetButtonStatus)(uint8_t buttonID),
+                     uint8_t buttonID);
 void FML_Button_RegEventCallBack(ButtonField_TypeDef *handle,
-                                        ButtonEvent_ENUM event,
-                                        void (*callback)(void));
+                                 ButtonEvent_ENUM event,
+                                 void (*callback)(void));
 ButtonEvent_ENUM FML_Button_GetEvent(ButtonField_TypeDef *handle);
 void FML_Button_Scan(void);
 
@@ -52,7 +52,10 @@ void FML_Button_Init(ButtonField_TypeDef *handle,
     handle->buttonTrigger = false;                                              // 无触发
     handle->buttonFsmVar = BUTTON_PRESSDOWN_IDLE;                               // 初始化状态机为空闲态
     handle->GetButtonStatus = GetButtonStatus;                                  // 注册按键状态获取函数
-    Init();                                                                     // 初始化按键
+    if (Init != NULL)
+    {
+        Init();                                                                 // 初始化按键
+    }
 
     if (gpButtonLinkList == NULL)                                               // 为空链表
     {
@@ -104,7 +107,10 @@ static void FML_Button_Debounce(ButtonField_TypeDef *handle)
 {
     bool curButtonLevel = false;
 
-    curButtonLevel = handle->GetButtonStatus(handle->buttonID);                 // 读取当前按键电平
+    if (handle->GetButtonStatus != NULL)                                        // 已注册按键电平读取函数
+    {
+        curButtonLevel = handle->GetButtonStatus(handle->buttonID);             // 读取当前按键电平
+    }
     if (curButtonLevel != handle->buttonTrigger)                                // 与滤波后的稳定电平不一致（电平跳变）
     {
         if (++handle->debounceCnt >= DEBOUNCE_TIME)                             // 消抖计数，并判断消抖是否完成
