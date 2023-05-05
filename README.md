@@ -144,9 +144,9 @@ FmlButton是处于功能模块层的按键驱动库;
     ```C
     int main(void)
     {
-        static uint8_t button0Event = 0;
+        static uint8_t sButton0Event = 0;
 
-        button0Event = EVENT_NONE_BTN;
+        sButton0Event = EVENT_NONE_BTN;
         ...
         while (1)
         {
@@ -154,10 +154,10 @@ FmlButton是处于功能模块层的按键驱动库;
             {
                 fmlButton.Scan();
             }
-            if (button0Event != fmlButton.GetEvent(button0))
+            if (sButton0Event != fmlButton.GetEvent(&button0))
             {
-                button0Event = fmlButton.GetEvent(button0);
-                switch (button0Event)
+                sButton0Event = fmlButton.GetEvent(&button0);
+                switch (sButton0Event)
                 {
                     case EVENT_PRESS_DOWN:
                         // @todo Something you want to do while Press Down.
