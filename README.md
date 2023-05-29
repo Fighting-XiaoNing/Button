@@ -53,7 +53,7 @@ FmlButton是处于功能模块层的按键驱动库;
 ## 使用
 
 1. 添加`FmlButton.h`和`FmlButton.c`文件至工程
-2. 添加`HdlButton.h`和`HdlButton.c`文件，提供`hdlButton.Init()`和`hdlButton.ReadStatus()`方法
+2. 添加`HdlButton.h`和`HdlButton.c`文件，提供`HDL_Button_Init()`和`HDL_Button_ReadStatus()`方法
 
     ```C
     /**
@@ -61,7 +61,7 @@ FmlButton是处于功能模块层的按键驱动库;
     * @param  None
     * @retval None
     */
-    static void HDL_Button_Init(void)
+    void HDL_Button_Init(void)
     {
         // @todo 初始化按键硬件
     }
@@ -74,7 +74,7 @@ FmlButton是处于功能模块层的按键驱动库;
     * @retval true - 有效电平
     * @retval false - 无效电平
     */
-    static bool HDL_Button_ReadStatus(uint8_t buttonID)
+    bool HDL_Button_ReadStatus(uint8_t buttonID)
     {
         bool bitstatus = false;
 
@@ -119,8 +119,8 @@ FmlButton是处于功能模块层的按键驱动库;
     - 第四个实参要与`HDL_Button_ReadStatus(uint8_t buttonID)`内的case值一一对应
 
     ```C
-    fmlButton.Init(&button0, hdlButton.Init, hdlButton.ReadStatus, 0);
-    fmlButton.Init(&button1, hdlButton.Init, hdlButton.ReadStatus, 1);
+    FML_Button_Init(&button0, HDL_Button_Init, HDL_Button_ReadStatus, 0);
+    FML_Button_Init(&button1, HDL_Button_Init, HDL_Button_ReadStatus, 1);
     ```
 
 6. 定时扫描按键（**异步回调方式**）
@@ -133,7 +133,7 @@ FmlButton是处于功能模块层的按键驱动库;
         {
             if (5ms时间到)
             {
-                fmlButton.Scan();
+                FML_Button_Scan();
             }
         }
     }
@@ -152,11 +152,11 @@ FmlButton是处于功能模块层的按键驱动库;
         {
             if (5ms时间到)
             {
-                fmlButton.Scan();
+                FML_Button_Scan();
             }
-            if (sButton0Event != fmlButton.GetEvent(&button0))
+            if (sButton0Event != FML_Button_GetEvent(&button0))
             {
-                sButton0Event = fmlButton.GetEvent(&button0);
+                sButton0Event = FML_Button_GetEvent(&button0);
                 switch (sButton0Event)
                 {
                     case EVENT_PRESS_DOWN:

@@ -4,7 +4,7 @@
  * @post      Embedded Software Engineer
  * @brief     °´¼ü
  * @version   1.0.0
- * @date      2023-03-16
+ * @date      2023-05-29
  * @copyright Copyright (c) 2023
  */
 #ifndef __HDL_BUTTON_H
@@ -13,15 +13,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-typedef struct HdlButton
-{
-    void (*Init)(void);
-    void (*DeInit)(void);
-    void (*EnterLowPower)(void);
-    void (*ExitLowPower)(void);
-    bool (*ReadStatus)(uint8_t buttonID);
-} HdlButton_TypeDef;
-
-extern const HdlButton_TypeDef hdlButton;
+extern void HDL_Button_Init(void);
+extern void HDL_Button_DeInit(void);
+extern void HDL_Button_EnterLowPower(void);
+extern void HDL_Button_ExitLowPower(void);
+extern bool HDL_Button_ReadStatus(uint8_t buttonID);
 
 #endif /* __HDL_BUTTON_H */

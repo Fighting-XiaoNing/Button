@@ -4,7 +4,7 @@
  * @post      Embedded Software Engineer
  * @brief     ∞¥º¸
  * @version   1.0.0
- * @date      2023-04-03
+ * @date      2023-05-29
  * @copyright Copyright (c) 2023
  */
 #ifndef __FML_BUTTON_H
@@ -44,22 +44,14 @@ typedef struct ButtonField
     struct ButtonField *next;                                                   // ¡¥±Ì÷∏’Î”Ú
 } ButtonField_TypeDef;
 
-typedef struct FmlButton
-{
-    void (*Init)(ButtonField_TypeDef *handle,
-                 void (*Init)(void),
-                 bool (*GetButtonStatus)(uint8_t buttonID),
-                 uint8_t buttonID);
-    void (*DeInit)(void);
-    void (*EnterLowPower)(void);
-    void (*ExitLowPower)(void);
-    void (*RegEventCallBack)(ButtonField_TypeDef *handle,
-                             ButtonEvent_ENUM event,
-                             void (*callback)(void));
-    ButtonEvent_ENUM (*GetEvent)(ButtonField_TypeDef *handle);
-    void (*Scan)(void);
-} FmlButton_TypeDef;
-
-extern const FmlButton_TypeDef fmlButton;
+extern void FML_Button_Init(ButtonField_TypeDef *handle,
+                            void (*Init)(void),
+                            bool (*GetButtonStatus)(uint8_t buttonID),
+                            uint8_t buttonID);
+extern void FML_Button_RegEventCallBack(ButtonField_TypeDef *handle,
+                                        ButtonEvent_ENUM event,
+                                        void (*callback)(void));
+extern ButtonEvent_ENUM FML_Button_GetEvent(ButtonField_TypeDef *handle);
+extern void FML_Button_Scan(void);
 
 #endif /* __FML_BUTTON_H */

@@ -4,32 +4,18 @@
  * @post      Embedded Software Engineer
  * @brief     按键
  * @version   1.0.0
- * @date      2023-03-21
+ * @date      2023-05-29
  * @copyright Copyright (c) 2023
  */
 #include "HdlButton.h"
 #include <reg52.h>
-
-static void HDL_Button_Init(void);
-static void HDL_Button_DeInit(void);
-static void HDL_Button_EnterLowPower(void);
-static void HDL_Button_ExitLowPower(void);
-static bool HDL_Button_ReadStatus(uint8_t buttonID);
-
-const HdlButton_TypeDef hdlButton = {
-    HDL_Button_Init,
-    HDL_Button_DeInit,
-    HDL_Button_EnterLowPower,
-    HDL_Button_ExitLowPower,
-    HDL_Button_ReadStatus
-};
 
 /**
  * @brief  按键初始化
  * @param  None
  * @retval None
  */
-static void HDL_Button_Init(void)
+void HDL_Button_Init(void)
 {
 }
 
@@ -38,7 +24,7 @@ static void HDL_Button_Init(void)
  * @param  None
  * @retval None
  */
-static void HDL_Button_DeInit(void)
+void HDL_Button_DeInit(void)
 {}
 
 /**
@@ -46,7 +32,7 @@ static void HDL_Button_DeInit(void)
  * @param  None
  * @retval None
  */
-static void HDL_Button_EnterLowPower(void)
+void HDL_Button_EnterLowPower(void)
 {}
 
 /**
@@ -54,7 +40,7 @@ static void HDL_Button_EnterLowPower(void)
  * @param  None
  * @retval None
  */
-static void HDL_Button_ExitLowPower(void)
+void HDL_Button_ExitLowPower(void)
 {}
 
 /**
@@ -63,7 +49,7 @@ static void HDL_Button_ExitLowPower(void)
  * @retval true - 有效电平
  * @retval false - 无效电平
  */
-static bool HDL_Button_ReadStatus(uint8_t buttonID)
+bool HDL_Button_ReadStatus(uint8_t buttonID)
 {
     bool bitstatus = false;
 

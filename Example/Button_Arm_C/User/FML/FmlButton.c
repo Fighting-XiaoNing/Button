@@ -4,11 +4,10 @@
  * @post      Embedded Software Engineer
  * @brief     按键
  * @version   1.0.0
- * @date      2023-04-18
+ * @date      2023-05-29
  * @copyright Copyright (c) 2023
  */
 #include "FmlButton.h"
-#include "HdlButton.h"
 
 enum ButtonFsmStatus
 {
@@ -20,30 +19,8 @@ enum ButtonFsmStatus
 
 static ButtonField_TypeDef *gpButtonLinkList = NULL;                            // 按键链表头指针
 
-static void FML_Button_Init(ButtonField_TypeDef *handle,
-                            void (*Init)(void),
-                            bool (*GetButtonStatus)(uint8_t buttonID),
-                            uint8_t buttonID);
-static void FML_Button_DeInit(void);
-static void FML_Button_EnterLowPower(void);
-static void FML_Button_ExitLowPower(void);
-static void FML_Button_RegEventCallBack(ButtonField_TypeDef *handle,
-                                        ButtonEvent_ENUM event,
-                                        void (*callback)(void));
-static ButtonEvent_ENUM FML_Button_GetEvent(ButtonField_TypeDef *handle);
 static void FML_Button_Debounce(ButtonField_TypeDef *handle);
 static void FML_Button_Handle(ButtonField_TypeDef *handle);
-static void FML_Button_Scan(void);
-
-const FmlButton_TypeDef fmlButton = {
-    FML_Button_Init,
-    FML_Button_DeInit,
-    FML_Button_EnterLowPower,
-    FML_Button_ExitLowPower,
-    FML_Button_RegEventCallBack,
-    FML_Button_GetEvent,
-    FML_Button_Scan
-};
 
 /**
  * @brief  按键初始化
@@ -53,10 +30,10 @@ const FmlButton_TypeDef fmlButton = {
  * @param  buttonID 按键ID
  * @retval None
  */
-static void FML_Button_Init(ButtonField_TypeDef *handle,
-                            void (*Init)(void),
-                            bool (*GetButtonStatus)(uint8_t buttonID),
-                            uint8_t buttonID)
+void FML_Button_Init(ButtonField_TypeDef *handle,
+                     void (*Init)(void),
+                     bool (*GetButtonStatus)(uint8_t buttonID),
+                     uint8_t buttonID)
 {
     ButtonField_TypeDef *p = NULL;
 
@@ -88,45 +65,15 @@ static void FML_Button_Init(ButtonField_TypeDef *handle,
 }
 
 /**
- * @brief  按键反初始化
- * @param  None
- * @retval None
- */
-static void FML_Button_DeInit(void)
-{
-    hdlButton.DeInit();                                                         // 反初始化按键
-}
-
-/**
- * @brief  按键进入低功耗
- * @param  None
- * @retval None
- */
-static void FML_Button_EnterLowPower(void)
-{
-    hdlButton.EnterLowPower();                                                  // 按键进入低功耗
-}
-
-/**
- * @brief  按键退出低功耗
- * @param  None
- * @retval None
- */
-static void FML_Button_ExitLowPower(void)
-{
-    hdlButton.ExitLowPower();                                                   // 按键退出低功耗
-}
-
-/**
  * @brief  按键注册事件回调函数
  * @param  handle 按键句柄
  * @param  event 事件类型
  * @param  callback 回调函数
  * @retval None
  */
-static void FML_Button_RegEventCallBack(ButtonField_TypeDef *handle,
-                                        ButtonEvent_ENUM event,
-                                        void (*callback)(void))
+void FML_Button_RegEventCallBack(ButtonField_TypeDef *handle,
+                                 ButtonEvent_ENUM event,
+                                 void (*callback)(void))
 {
     handle->callBackArray[event] = callback;                                    // 将回调函数存入函数指针数组
 }
@@ -136,7 +83,7 @@ static void FML_Button_RegEventCallBack(ButtonField_TypeDef *handle,
  * @param  handle 按键句柄
  * @retval 事件 - 见ButtonEvent_ENUM枚举体
  */
-static ButtonEvent_ENUM FML_Button_GetEvent(ButtonField_TypeDef *handle)
+ButtonEvent_ENUM FML_Button_GetEvent(ButtonField_TypeDef *handle)
 {
     return (ButtonEvent_ENUM)(handle->event);                                   // 事件
 }
@@ -286,7 +233,7 @@ static void FML_Button_Handle(ButtonField_TypeDef *handle)
  * @param  None
  * @retval None
  */
-static void FML_Button_Scan(void)
+void FML_Button_Scan(void)
 {
     ButtonField_TypeDef *curButton = NULL;
 

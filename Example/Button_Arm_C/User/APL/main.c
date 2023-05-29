@@ -4,7 +4,7 @@
  * @post      Embedded Software Engineer
  * @brief     Ö÷º¯Êý
  * @version   1.0.0
- * @date      2023-03-21
+ * @date      2023-05-29
  * @copyright Copyright (c) 2023
  */
 #include "stm32f1xx_hal.h"
@@ -153,29 +153,29 @@ int main(void)
     HAL_Init();
     SystemClock_Config();
     MX_USART1_UART_Init();
-    fmlButton.RegEventCallBack(&button0, EVENT_PRESS_DOWN, Btn0PressDown);
-    fmlButton.RegEventCallBack(&button0, EVENT_RELEASE, Btn0Release);
-    fmlButton.RegEventCallBack(&button0, EVENT_CLICK, Btn0Click);
-    fmlButton.RegEventCallBack(&button0, EVENT_LONG_PRESS, Btn0LongPress);
-    fmlButton.RegEventCallBack(&button0, EVENT_PRESS_HOLD, Btn0PressHold);
-    fmlButton.Init(&button0, hdlButton.Init, hdlButton.ReadStatus, 0);
-    fmlButton.RegEventCallBack(&button1, EVENT_PRESS_DOWN, Btn1PressDown);
-    fmlButton.RegEventCallBack(&button1, EVENT_RELEASE, Btn1Release);
-    fmlButton.RegEventCallBack(&button1, EVENT_CLICK, Btn1Click);
-    fmlButton.RegEventCallBack(&button1, EVENT_LONG_PRESS, Btn1LongPress);
-    fmlButton.RegEventCallBack(&button1, EVENT_PRESS_HOLD, Btn1PressHold);
-    fmlButton.Init(&button1, hdlButton.Init, hdlButton.ReadStatus, 1);
-    fmlButton.RegEventCallBack(&button2, EVENT_PRESS_DOWN, Btn2PressDown);
-    fmlButton.RegEventCallBack(&button2, EVENT_RELEASE, Btn2Release);
-    fmlButton.RegEventCallBack(&button2, EVENT_CLICK, Btn2Click);
-    fmlButton.RegEventCallBack(&button2, EVENT_LONG_PRESS, Btn2LongPress);
-    fmlButton.RegEventCallBack(&button2, EVENT_PRESS_HOLD, Btn2PressHold);
-    fmlButton.Init(&button2, hdlButton.Init, hdlButton.ReadStatus, 2);
+    FML_Button_RegEventCallBack(&button0, EVENT_PRESS_DOWN, Btn0PressDown);
+    FML_Button_RegEventCallBack(&button0, EVENT_RELEASE, Btn0Release);
+    FML_Button_RegEventCallBack(&button0, EVENT_CLICK, Btn0Click);
+    FML_Button_RegEventCallBack(&button0, EVENT_LONG_PRESS, Btn0LongPress);
+    FML_Button_RegEventCallBack(&button0, EVENT_PRESS_HOLD, Btn0PressHold);
+    FML_Button_Init(&button0, HDL_Button_Init, HDL_Button_ReadStatus, 0);
+    FML_Button_RegEventCallBack(&button1, EVENT_PRESS_DOWN, Btn1PressDown);
+    FML_Button_RegEventCallBack(&button1, EVENT_RELEASE, Btn1Release);
+    FML_Button_RegEventCallBack(&button1, EVENT_CLICK, Btn1Click);
+    FML_Button_RegEventCallBack(&button1, EVENT_LONG_PRESS, Btn1LongPress);
+    FML_Button_RegEventCallBack(&button1, EVENT_PRESS_HOLD, Btn1PressHold);
+    FML_Button_Init(&button1, HDL_Button_Init, HDL_Button_ReadStatus, 1);
+    FML_Button_RegEventCallBack(&button2, EVENT_PRESS_DOWN, Btn2PressDown);
+    FML_Button_RegEventCallBack(&button2, EVENT_RELEASE, Btn2Release);
+    FML_Button_RegEventCallBack(&button2, EVENT_CLICK, Btn2Click);
+    FML_Button_RegEventCallBack(&button2, EVENT_LONG_PRESS, Btn2LongPress);
+    FML_Button_RegEventCallBack(&button2, EVENT_PRESS_HOLD, Btn2PressHold);
+    FML_Button_Init(&button2, HDL_Button_Init, HDL_Button_ReadStatus, 2);
     HAL_UART_Transmit(&huart1, (uint8_t *)"Start Test!\r\n", 13, 0xFFFF);
     while (1)
     {
         HAL_Delay(5);
-        fmlButton.Scan();
+        FML_Button_Scan();
     }
 }
 

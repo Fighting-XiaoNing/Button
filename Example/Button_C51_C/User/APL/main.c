@@ -4,7 +4,7 @@
  * @post      Embedded Software Engineer
  * @brief     主函数
  * @version   1.0.0
- * @date      2023-04-03
+ * @date      2023-05-29
  * @copyright Copyright (c) 2023
  */
 #include <reg52.h>
@@ -139,19 +139,19 @@ int main(void)
     FML_Button_RegEventCallBack(&button0, EVENT_CLICK, Btn0Click);
     FML_Button_RegEventCallBack(&button0, EVENT_LONG_PRESS, Btn0LongPress);
     FML_Button_RegEventCallBack(&button0, EVENT_PRESS_HOLD, Btn0PressHold);
-    FML_Button_Init(&button0, hdlButton.Init, hdlButton.ReadStatus, 0);
+    FML_Button_Init(&button0, HDL_Button_Init, HDL_Button_ReadStatus, 0);
     FML_Button_RegEventCallBack(&button1, EVENT_PRESS_DOWN, Btn1PressDown);
     FML_Button_RegEventCallBack(&button1, EVENT_RELEASE, Btn1Release);
     FML_Button_RegEventCallBack(&button1, EVENT_CLICK, Btn1Click);
     FML_Button_RegEventCallBack(&button1, EVENT_LONG_PRESS, Btn1LongPress);
     FML_Button_RegEventCallBack(&button1, EVENT_PRESS_HOLD, Btn1PressHold);
-    FML_Button_Init(&button1, hdlButton.Init, hdlButton.ReadStatus, 1);
+    FML_Button_Init(&button1, HDL_Button_Init, HDL_Button_ReadStatus, 1);
     FML_Button_RegEventCallBack(&button2, EVENT_PRESS_DOWN, Btn2PressDown);
     FML_Button_RegEventCallBack(&button2, EVENT_RELEASE, Btn2Release);
     FML_Button_RegEventCallBack(&button2, EVENT_CLICK, Btn2Click);
     FML_Button_RegEventCallBack(&button2, EVENT_LONG_PRESS, Btn2LongPress);
     FML_Button_RegEventCallBack(&button2, EVENT_PRESS_HOLD, Btn2PressHold);
-    FML_Button_Init(&button2, hdlButton.Init, hdlButton.ReadStatus, 2);
+    FML_Button_Init(&button2, HDL_Button_Init, HDL_Button_ReadStatus, 2);
 
     SendString("开始测试\r\n");
     while (1)

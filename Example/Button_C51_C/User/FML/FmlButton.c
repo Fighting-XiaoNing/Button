@@ -4,7 +4,7 @@
  * @post      Embedded Software Engineer
  * @brief     按键
  * @version   1.0.0
- * @date      2023-04-18
+ * @date      2023-05-29
  * @copyright Copyright (c) 2023
  */
 #include "FmlButton.h"
@@ -21,16 +21,6 @@ static ButtonField_TypeDef *gpButtonLinkList = NULL;                            
 
 static void FML_Button_Debounce(ButtonField_TypeDef *handle);
 static void FML_Button_Handle(ButtonField_TypeDef *handle);
-
-void FML_Button_Init(ButtonField_TypeDef *handle,
-                     void (*Init)(void),
-                     bool (*GetButtonStatus)(uint8_t buttonID),
-                     uint8_t buttonID);
-void FML_Button_RegEventCallBack(ButtonField_TypeDef *handle,
-                                 ButtonEvent_ENUM event,
-                                 void (*callback)(void));
-ButtonEvent_ENUM FML_Button_GetEvent(ButtonField_TypeDef *handle);
-void FML_Button_Scan(void);
 
 /**
  * @brief  按键初始化
