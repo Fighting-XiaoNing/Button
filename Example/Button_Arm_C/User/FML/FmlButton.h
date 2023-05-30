@@ -4,7 +4,7 @@
  * @post      Embedded Software Engineer
  * @brief     按键
  * @version   1.0.0
- * @date      2023-05-29
+ * @date      2023-05-30
  * @copyright Copyright (c) 2023
  */
 #ifndef __FML_BUTTON_H
@@ -15,9 +15,9 @@
 #include <stdint.h>
 
 #define SCAN_TIME 5                                                             // 扫描时间（ms）
-#define DEBOUNCE_TIME (15 / SCAN_TIME)                                          // 消抖时间
-#define CLICK_TIME (300 /  SCAN_TIME)                                           // 点击间隔时间
-#define LONG_PRESS_TIME (1000 / SCAN_TIME)                                      // 长按所需时间
+#define DEBOUNCE_TIME (20 / SCAN_TIME)                                          // 消抖时间
+#define CLICK_TIME (250 /  SCAN_TIME)                                           // 点击间隔时间
+#define LONG_PRESS_TIME (2000 / SCAN_TIME)                                      // 长按所需时间
 
 typedef enum ButtonEvent
 {
