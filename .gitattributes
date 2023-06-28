@@ -1,2 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+*.uvproj text eol=lf
+*.uvopt text eol=lf
+*.uvprojx text eol=lf
+*.uvoptx text eol=lf

@@ -4,7 +4,7 @@
  * @post      Embedded Software Engineer
  * @brief     按键
  * @version   1.0.0
- * @date      2023-05-29
+ * @date      2023-06-28
  * @copyright Copyright (c) 2023
  */
 #include "FmlButton.h"
@@ -203,15 +203,7 @@ static void FML_Button_Handle(ButtonField_TypeDef *handle)
             }
             break;
         case BUTTON_HOLD_RELEASE:///////////////////////////////////////////////// 处理：按住or松开
-            if (handle->buttonTrigger == true)                                  // 按键按下
-            {
-                handle->event = EVENT_PRESS_HOLD;                               // 按住事件
-                if (handle->callBackArray[EVENT_PRESS_HOLD])                    // 已注册事件回调函数
-                {
-                    handle->callBackArray[EVENT_PRESS_HOLD]();                  // 调用事件回调函数
-                }
-            }
-            else
+            if (handle->buttonTrigger == false)                                 // 松开按键
             {
                 handle->event = EVENT_RELEASE;                                  // 释放事件
                 if (handle->callBackArray[EVENT_RELEASE])                       // 已注册事件回调函数
@@ -221,6 +213,15 @@ static void FML_Button_Handle(ButtonField_TypeDef *handle)
                 handle->clickCnt = 0;
                 handle->ticks = 0;
                 handle->buttonFsmVar = BUTTON_PRESSDOWN_IDLE;
+            }
+            else if (handle->ticks >= PRESS_HOLD_TIME)                          // 按住达到触发时间
+            {
+                handle->event = EVENT_PRESS_HOLD;                               // 按住事件
+                if (handle->callBackArray[EVENT_PRESS_HOLD])                    // 已注册事件回调函数
+                {
+                    handle->callBackArray[EVENT_PRESS_HOLD]();                  // 调用事件回调函数
+                }
+                handle->ticks = 0;
             }
             break;
         default:
